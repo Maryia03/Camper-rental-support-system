@@ -35,7 +35,7 @@ const App = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [campersData, setCampersData] = useState([]);
 
-    // Wczytanie danych kamperów z localStorage
+    //Wczytanie danych kamperów z localStorage
     useEffect(() => {
         const savedCampers = JSON.parse(localStorage.getItem('campers')) || [];
         setCampersData(savedCampers);

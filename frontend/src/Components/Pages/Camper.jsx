@@ -51,7 +51,7 @@ const Camper = ({ setReservations }) => {
 
     const handleSearch = (e) =>{
         e.preventDefault();
-        // console.log(searchParams)
+        //console.log(searchParams)
         axios.get('http://localhost:8080/reservation/find?begining='+searchParams.startDate+'&end='+searchParams.endDate)
         .then((res)=>{
             console.log(res)
@@ -75,7 +75,7 @@ const Camper = ({ setReservations }) => {
                 guests: searchParams.guests,
                 image: camper.image,
                 userId: currentUser.id,
-                // price: getPrice(camper) // Dodaj dynamiczną cenę do rezerwacji
+                //price: getPrice(camper)
             };
             setReservations((prevReservations) => [...prevReservations, reservation]);
             navigate('/reservations');
@@ -165,8 +165,8 @@ const Camper = ({ setReservations }) => {
                                 <img src={camper.imageLink} alt={camper.name} className="camper-image" />
                                 <h3>{camper.name}</h3>
                                 <p>{camper.description}</p>
-                                {/* <p>Cena: {camper.price} zł/dzień</p> */}
-                                {/* <p>Ilość osób: {camper.capacity}</p> */}
+                                {/*<p>Cena: {camper.price} zł/dzień</p>*/}
+                                {/*<p>Ilość osób: {camper.capacity}</p>*/}
                                 <button
                                     onClick={() => handleReservation(camper)}
                                     className="camper-btn btn-primary">

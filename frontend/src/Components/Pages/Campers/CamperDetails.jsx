@@ -6,8 +6,8 @@ import kamper1Image from './Image/Camper1/dom1.jpeg';
 import kamper2Image from './Image/Camper1/dom2.jpeg';
 import kamper3Image from './Image/Camper1/dom4.jpeg';
 import kamper4Image from './Image/Camper1/image5.jpeg';
-import Calendar from 'react-calendar';  // Importujemy react-calendar
-import 'react-calendar/dist/Calendar.css';  // Importujemy stylowanie kalendarza
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 import { isWithinInterval, isSameDay, parse } from 'date-fns';
@@ -33,7 +33,7 @@ const CamperDetails = () => {
     const [guests, setGuests] = useState(1);
     const [reservationStatus, setReservationStatus] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [showLoginModal, setShowLoginModal] = useState(false); // Stan do pokazania modala logowania
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const [price, setPrice] = useState(null) ;
     const [occupied,setOccupied] = useState([]);
     const [locations, setLocations] = useState([]);
@@ -77,10 +77,9 @@ const CamperDetails = () => {
         }
     }, [startDate, endDate])
 
-    // Funkcja pomocnicza do formatowania daty na string
     const formatDate = (date) => {
         if (!date) return '';
-        return date.toLocaleDateString();  // Zwraca datę w formacie dd/mm/yyyy
+        return date.toLocaleDateString();
     };
 
     function tileDisable({date,view}){
@@ -93,11 +92,10 @@ const CamperDetails = () => {
         }
     }
 
-    // Funkcja rezerwacji
+    //Funkcja rezerwacji
     const handleReserve = () => {
         if (!Cookies.get("user_key")) {
             setShowLoginModal(true);
-            // Sprawdzenie, czy użytkownik jest zalogowany
             alert("Najpierw się zaloguj")
             return;
         }
@@ -106,16 +104,16 @@ const CamperDetails = () => {
             return setErrorMessage('Kamper jest niedostępny w wybranym terminie.');
         }
 
-        // Dodanie rezerwacji
+        //Dodanie rezerwacji
         const newReservation = {
             // id: Date.now(),
             // userId: currentUser.id,
-            // image: kamper4Image, // Zdjęcie kampera
+            // image: kamper4Image,
             // startDate: formatDate(startDate),
             // endDate: formatDate(endDate),
             // location,
             // guests,
-            // camper: 'Kamper A'  // Nazwa kampera
+            // camper: 'Kamper A'
 
             vehicleId: camperId,
             reservationStartDate: new Date(startDate).toISOString(),
@@ -126,8 +124,8 @@ const CamperDetails = () => {
         console.log(newReservation)
 
         addReservation(newReservation)
-        navigate('/reservations');  // Przekierowanie na stronę rezerwacji
-        setTimeout(() => setReservationStatus(''), 3000);  // Status rezerwacji na 3 sekundy
+        navigate('/reservations');
+        setTimeout(() => setReservationStatus(''), 3000);
         
     };
 
@@ -142,7 +140,7 @@ const CamperDetails = () => {
             </div>
             <hr className='divider' />
             <div className="camper1-text-section">
-                {/* Pierwszy blok tekstowy z obrazkiem */}
+                {/*Pierwszy blok tekstowy z obrazkiem*/}
                 <div className="camper1-text-image">
                     <img src={kamper1Image} alt="Kamper 1" className="camper1-image" />
                     <div className="camper1-text">
@@ -163,7 +161,7 @@ const CamperDetails = () => {
                     </div>
                 </div>
 
-                {/* Drugi blok tekstowy z obrazkiem (odwrócony układ) */}
+                {/*Drugi blok tekstowy z obrazkiem (odwrócony układ)*/}
                 <div className="camper1-text-image reverse">
                     <div className="camper1-text">
                         <h3>Stylowe i praktyczne wyposażenie</h3>
@@ -189,8 +187,6 @@ const CamperDetails = () => {
                 </div>
             </div>
             <hr className="divider" />
-
-            {/* Sekcja cech kampera z ikonami */}
             {/* <div className="camper1-features-container">
                 <div className="camper1-features">
                     <div className="feature-item">
@@ -227,9 +223,6 @@ const CamperDetails = () => {
                 <div className="camper1-reservation-form-container">
                     <h3>Rezerwacja Kampera</h3>
                     <div className="form-control">
-
-                        {/* Zmienić na selecta z api !!!!!
-                         */}
                         <label htmlFor="location">Lokalizacja:</label>
                         <select
                             id="location"

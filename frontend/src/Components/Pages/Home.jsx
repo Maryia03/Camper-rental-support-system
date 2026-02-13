@@ -13,9 +13,9 @@ const Home = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 3000); // Zmiana co 3 sekundy
+        }, 3000); //zmiana co 3 sekundy
 
-        return () => clearInterval(interval); // Czyszczenie interwału przy odmontowywaniu
+        return () => clearInterval(interval);
     }, []);
 
     return (

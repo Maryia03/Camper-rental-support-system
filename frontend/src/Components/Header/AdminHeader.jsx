@@ -5,7 +5,7 @@ import './Header.css';
 import { AuthContext } from '../../Context/AuthContext';
 
 const AdminHeader = () => {
-    const { logout } = useContext(AuthContext);  // Pobieramy funkcję wylogowania z kontekstu
+    const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {

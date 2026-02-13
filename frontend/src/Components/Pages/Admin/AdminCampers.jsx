@@ -10,7 +10,7 @@ const AdminCampers = () => {
         price: 0,
         capacity: 0,
         vehicleTypeId: '',
-        image: ''  // Dodanie pola na zdjęcie
+        image: ''
     });
     const { getAllCampers,addCamper,deleteCamper,updateCamper } = useContext(AuthContext);
 
@@ -37,7 +37,7 @@ const AdminCampers = () => {
 
         setNewCamper((prev) => ({
             ...prev,
-            image: e.target.value // Zapisujemy obraz w base64
+            image: e.target.value
         }));
         // const file = e.target.files[0];
         // if (file) {
@@ -45,10 +45,10 @@ const AdminCampers = () => {
         //     reader.onloadend = () => {
         //         setNewCamper((prev) => ({
         //             ...prev,
-        //             image: reader.result // Zapisujemy obraz w base64
+        //             image: reader.result
         //         }));
         //     };
-        //     reader.readAsDataURL(file); // Czytanie obrazu jako base64
+        //     reader.readAsDataURL(file); 
         // }
     
     };
@@ -90,7 +90,7 @@ const AdminCampers = () => {
         
         await updateCamper(editingCamper)
 
-        // setEditingCamper(null);
+        //setEditingCamper(null);
         setEditModal(false)
         setCampersData([]);
     };
@@ -108,7 +108,7 @@ const AdminCampers = () => {
 
         setEditingCamper((prev) => ({
             ...prev,
-            imageLink: e.target.value // Zapisujemy obraz w base64
+            imageLink: e.target.value
         }));
 
         // const file = e.target.files[0];
@@ -234,7 +234,7 @@ const AdminCampers = () => {
                         <div key={camper.id} className="camper-card">
                             <h3>{camper.name}  [{camper.id}]</h3>
                             <p>{camper.description}</p>
-                            {/* <p>Cena: {camper.price} zł/dzień</p> */}
+                            {/*<p>Cena: {camper.price} zł/dzień</p>*/}
                             <p>Komentarz: {camper.comment}</p>
                             <p>Kategoria: {camper.vehicleType.name}</p>
                             {camper.imageLink && (

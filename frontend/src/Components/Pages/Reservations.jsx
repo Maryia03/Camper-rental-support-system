@@ -7,24 +7,21 @@ import axios from 'axios';
 import Cookies from 'js-cookie'
 
 
-
 const Reservations = () => {
     const { reservations,addReservation, resignReservation, acceptReservation, getReservations } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const [selectedReservation, setSelectedReservation] = useState(null);
     const [userReservations, setUserReservations] = useState([]);
     const [refresh, setRefresh] = useState(false);
-
-    // Wyświetlenie rezerwacji tylko dla zalogowanego użytkownika
-    // const userReservations = reservations.filter(reservation => reservation.userId === currentUser?.id);
-    // console.log("Rezerwacje dla użytkownika", currentUser?.id, ":", userReservations);
+    //Wyświetlenie rezerwacji tylko dla zalogowanego użytkownika
+    //const userReservations = reservations.filter(reservation => reservation.userId === currentUser?.id);
+    //console.log("Rezerwacje dla użytkownika", currentUser?.id, ":", userReservations);
     
 
     useEffect(() => {
         getAllReservations()
     },[refresh]);
 
-    // Funkcja do usuwania rezerwacji
     const handleResign = async (id) => {
         var res = await resignReservation(id)
         if(res != 'Success'){
@@ -49,19 +46,16 @@ const Reservations = () => {
       }
     }
 
-    // Funkcja do otwierania modalu
     const handleOpenModal = (reservation) => {
         setSelectedReservation(reservation);
         setShowModal(true);
     };
 
-    // Funkcja do zamykania modalu
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedReservation(null);
     };
 
-    // Jeśli użytkownik nie jest zalogowany, wyświetlamy komunikat
     if (!Cookies.get("user_id")) {
         return (
             <div className="reservations-container" style={{ marginTop: '80px' }}>
@@ -123,7 +117,7 @@ const Reservations = () => {
                 ))
             )}
 
-            {/* Modal z potwierdzeniem szczegółów rezerwacji */}
+            {/*Modal z potwierdzeniem szczegółów rezerwacji*/}
             {selectedReservation && (
                 <Modal show={showModal} onHide={handleCloseModal}>
                     <Modal.Header closeButton>
@@ -136,7 +130,6 @@ const Reservations = () => {
                         <p><strong>Lokalizacja:</strong> {selectedReservation.location.address+" "+selectedReservation.location.city}</p>
                         <p><strong>Status:</strong> {selectedReservation.order.orderStatus}</p>
                         <p><strong>Koszt:</strong> {selectedReservation.order.totalCost}</p>
-
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleCloseModal}>

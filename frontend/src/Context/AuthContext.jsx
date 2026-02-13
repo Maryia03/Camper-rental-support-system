@@ -5,25 +5,23 @@ import Cookies from 'js-cookie'
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);  // Stan dla aktualnego użytkownika
+    const [currentUser, setCurrentUser] = useState(null);
     const [errorMessage, setErrorMessage] = useState("")
-    const [users, setUsers] = useState([]);  // Stan dla wszystkich użytkowników
-    const [reservations, setReservations] = useState([]); // Stan dla rezerwacji
+    const [users, setUsers] = useState([]);
+    const [reservations, setReservations] = useState([]);
     const [notifications, setNotifications] = useState([]);
 
     const config = {
         headers: { 'Authorization': `Bearer ${Cookies.get("user_key")}` }
     };
 
-    // Pobieranie danych z localStorage przy uruchomieniu
+    //Pobieranie danych z localStorage przy uruchomieniu
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('currentUser'));
         if (storedUser) {
             setCurrentUser(storedUser);
         }
 
-
-        // Pobieramy użytkowników z localStorage
         const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
         const updatedUsers = storedUsers.map(user => {
             if (!user.registeredAt) {
@@ -36,9 +34,9 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('users', JSON.stringify(updatedUsers));
 
         if (storedUser) {
-            // const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-            // const userReservations = storedReservations.filter(reservation => reservation.userId === storedUser.id);
-            // setReservations(userReservations);
+            //const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+            //const userReservations = storedReservations.filter(reservation => reservation.userId === storedUser.id);
+            //setReservations(userReservations);
             
         }
 
@@ -50,10 +48,10 @@ export const AuthProvider = ({ children }) => {
         setInsurances(storedInsurances);
     }, []);
 
-    // Funkcja do logowania użytkownika
+    //Funkcja do logowania użytkownika
     const login = (user, password) => {
         var data = { email: user, password: password }
-        // console.log("login: " + JSON.stringify(data))
+        //console.log("login: " + JSON.stringify(data))
         axios.post("http://localhost:8080/auth/login", data
         ).then((res) => {
             console.log((res));
@@ -61,7 +59,7 @@ export const AuthProvider = ({ children }) => {
                 alert(res.data)
                 return ;
             }
-            // document.cookie = 'user_key=' + res.data.token + ';expires=' + new Date(new Date().getTime() + 3600000).toGMTString() + ';'
+            //document.cookie = 'user_key=' + res.data.token + ';expires=' + new Date(new Date().getTime() + 3600000).toGMTString() + ';'
             var thirtyMinutes = new Date(new Date().getTime() + 30 * 60 * 1000);
             Cookies.set("user_id",res.data.id,{expires: thirtyMinutes})
             Cookies.set("user_key",res.data.token,{expires: thirtyMinutes})
@@ -76,8 +74,6 @@ export const AuthProvider = ({ children }) => {
             console.log(errorMessage)
             return false;
         });
-
-
 
         // document.cookie = 'user_key=' + user + ";";
         // setCurrentUser(user);
@@ -94,12 +90,11 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove("user_key")
         Cookies.remove("user_id")
         Cookies.remove("admin")
-        // localStorage.removeItem('currentUser'); // Usuwamy użytkownika z localStorage
-        // localStorage.removeItem('reservations'); // Usuwamy rezerwacje z localStorage
+        //localStorage.removeItem('currentUser'); // Usuwamy użytkownika z localStorage
+        //localStorage.removeItem('reservations'); // Usuwamy rezerwacje z localStorage
     };
 
     const register = (newUser) => {
-
         var data = {
             email: newUser.email,
             username: newUser.firstName + " " + newUser.lastName,
@@ -142,7 +137,6 @@ export const AuthProvider = ({ children }) => {
             headers: { 'Authorization': `Bearer ${Cookies.get("user_key")}` }
         };
         var data = {
-
             vehicleId: newReservation.vehicleId,
             reservationStartDate: (newReservation.reservationStartDate),
             reservationEndDate: (newReservation.reservationEndDate),
@@ -175,7 +169,6 @@ export const AuthProvider = ({ children }) => {
 
     };
 
-    // Funkcja do usuwania rezerwacji
     const removeReservation = (reservationId) => {
         axios.delete(`http://localhost:8080/reservation/${reservationId}`,config)
         .then((res)=>{
@@ -250,7 +243,6 @@ export const AuthProvider = ({ children }) => {
 
     const acceptReservation = async (id) => {
         console.log("accept reservation"+id)
-
         return axios.get(`http://localhost:8080/reservation/accept/${id}`,config)
         .then((res)=>{
             console.log(res)
@@ -303,7 +295,6 @@ export const AuthProvider = ({ children }) => {
 
     const deleteUser = (userId) =>{
         console.log("delete user")
-
         axios.delete(`http://localhost:8080/user/delete?id=${userId}`,config)
         .then((res)=>{
             console.log(res.data)
@@ -315,7 +306,6 @@ export const AuthProvider = ({ children }) => {
 
     const cancelReservation = async(id) =>{
         console.log("cancel reservation")
-
         return axios.get(`http://localhost:8080/reservation/cancel/${id}`,config)
         .then((res)=>{
             console.log(res)
@@ -329,7 +319,6 @@ export const AuthProvider = ({ children }) => {
 
     const resignReservation = async(id) =>{
         console.log("resign reservation")
-
         return axios.get(`http://localhost:8080/reservation/resign/${id}`,config)
         .then((res)=>{
             console.log(res)
@@ -359,7 +348,6 @@ export const AuthProvider = ({ children }) => {
 
     const getAllPrices = async ()=>{
         console.log("all prices")
-
         return axios.get(`http://localhost:8080/prices/all`,config)
         .then((res)=>{
             console.log(res)
@@ -373,7 +361,6 @@ export const AuthProvider = ({ children }) => {
 
     const addPrice = async (priceData) => {
         console.log("add prices")
-
         return axios.post(`http://localhost:8080/prices/add`,priceData,config)
         .then((res)=>{
             console.log(res)
@@ -388,7 +375,6 @@ export const AuthProvider = ({ children }) => {
     const getReservations = () => {
         console.log("get reservations")
     }
-
 
     const addCamper = (camperData) =>{
         console.log("add camper")
@@ -417,7 +403,6 @@ export const AuthProvider = ({ children }) => {
     const updateCamper = (camperData) =>{
         console.log("update camper")
         console.log(camperData)
-
         axios.patch(`http://localhost:8080/vehicle/update/${camperData.id}`,camperData,config)
         .then((res)=>{
             console.log(res)
@@ -575,9 +560,6 @@ export const AuthProvider = ({ children }) => {
         })
 
     }
-
-    
-
 
 
     return (

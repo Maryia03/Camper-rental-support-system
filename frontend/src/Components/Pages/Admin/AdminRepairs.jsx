@@ -43,7 +43,7 @@ const Repairs = () => {
         console.log(newRepair)
         await addRepair(newRepair)
 
-        // setRepairs([...repairs, { ...newRepair, id: repairs.length + 1 }]);
+        //setRepairs([...repairs, { ...newRepair, id: repairs.length + 1 }]);
         setRefresh(!refresh)
         setNewRepair({});
     };

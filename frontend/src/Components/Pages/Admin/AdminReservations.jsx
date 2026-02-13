@@ -9,7 +9,7 @@ const AdminReservations = () => {
     const [reload, setReload] = useState(true);
 
     async function getReservations(userid) {
-        const fetchedReservations = await getReservationsByUserId(); // Wszystkie rezerwacje dla administratora
+        const fetchedReservations = await getReservationsByUserId();
         setReservations(fetchedReservations);
     }
     useEffect(() => {

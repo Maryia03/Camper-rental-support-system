@@ -5,17 +5,17 @@ import logo from './GoCamper.png';
 import './Header.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
-import LogIn from '../Pages/LogIn';  // Zaimportuj komponent logowania
+import LogIn from '../Pages/LogIn';
 import Cookies from 'js-cookie'
 
 const Header = () => {
 
     const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [showLoginModal, setShowLoginModal] = useState(false);  // Stan dla modala logowania
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
-    const handleLoginModalClose = () => setShowLoginModal(false);  // Funkcja zamykająca modal
-    const handleLoginModalShow = () => setShowLoginModal(true);   // Funkcja otwierająca modal
+    const handleLoginModalClose = () => setShowLoginModal(false);
+    const handleLoginModalShow = () => setShowLoginModal(true);
 
     const handleLogout = () => {
         logout();
@@ -46,7 +46,7 @@ const Header = () => {
                             <>
                                 <Nav.Link as={Link} to="/reservations">Rezerwacje</Nav.Link>
                                 
-                                {/* Link do panelu administracyjnego, jeśli użytkownik jest administratorem */}
+                                {/*Link do panelu administracyjnego, jeśli użytkownik jest administratorem*/}
                                 {Cookies.get('admin') == "1" && (
                                     <Nav.Link as={Link} to="/admin">Panel Administratora</Nav.Link>
                                 )}
@@ -58,7 +58,7 @@ const Header = () => {
                 </Navbar.Collapse>
             </Container>
 
-            {/* Modal logowania */}
+            {/*Modal logowania*/}
             <Modal show={showLoginModal} onHide={handleLoginModalClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Logowanie</Modal.Title>

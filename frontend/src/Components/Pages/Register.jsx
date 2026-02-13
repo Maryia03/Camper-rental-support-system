@@ -18,7 +18,7 @@ const Register = () => {
 
     useEffect(() => {
         if (currentUser) {
-            setRegistrationMessage(null); // Resetuj komunikat po udanej rejestracji
+            setRegistrationMessage(null);
             navigate('/');  
         }
     }, [currentUser, navigate, setRegistrationMessage]);
@@ -45,7 +45,7 @@ const Register = () => {
             <h2>Rejestracja</h2>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
-                    {/* Pola formularza */}
+                    {/*Pola formularza*/}
                     <div className="form-group">
                         <label htmlFor="firstName">Imię:</label>
                         <input

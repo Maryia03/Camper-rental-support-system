@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Components/Header/Header';
-import AdminHeader from './Components/Header/AdminHeader'; // Nagłówek dla administratora
+import AdminHeader from './Components/Header/AdminHeader';
 import Contact from './Components/Pages/Contact';
 import Footer from './Components/Footer/Footer';
 import Home from './Components/Pages/Home';
@@ -29,9 +29,9 @@ import { AuthContext } from './Context/AuthContext';
 import Cookies from 'js-cookie'
 import AdminLocationsLocations from './Components/Pages/Admin/AdminLocations';
 import AdminLocations from './Components/Pages/Admin/AdminLocations';
+
 const App = () => {
     const {  addReservation, removeReservation, logout } = useContext(AuthContext);
-
     const [currentUser, setCurrentUser] = useState(null);
     const [campersData, setCampersData] = useState([]);
 
@@ -48,7 +48,7 @@ const App = () => {
     return (
         <Router>
             <div className="App">
-                {/* Renderowanie nagłówka w zależności od roli użytkownika */}
+                {/*Renderowanie nagłówka w zależności od roli użytkownika*/}
                 {Cookies.get('admin') == "1" ? (
                     <AdminHeader />
                 ) : (
@@ -58,7 +58,7 @@ const App = () => {
 
                 <main>
                     <Routes>
-                        {/* Publiczne trasy */}
+                        {/*Publiczne trasy*/}
                         <Route path="/" element={<Home />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/contact" element={<Contact />} />
@@ -66,13 +66,13 @@ const App = () => {
                         <Route path="/login" element={Cookies.get('user_id') ? <Navigate to="/" /> : <LogIn />} />
                         <Route path="/register" element={Cookies.get('user_id') ? <Navigate to="/" /> : <Register />} />
                         <Route path="/camper/:camperId" element={<CamperDetails addReservation={addReservation} />} />
-                        {/* <Route path="/camper/2" element={<Camper2 addReservation={addReservation} />} />
-                        <Route path="/camper/3" element={<Camper3 addReservation={addReservation} />} /> */}
+                        {/*<Route path="/camper/2" element={<Camper2 addReservation={addReservation} />} />
+                        <Route path="/camper/3" element={<Camper3 addReservation={addReservation} />} />*/}
                         <Route path='/static' element={<Camper1 addReservation={addReservation}/>} />
                         <Route path="/camper" element={<Camper addReservation={addReservation} />} />
                         <Route path="/reservations" element={<Reservations removeReservation={removeReservation} />} />
 
-                        {/* Trasy administracyjne */}
+                        {/*Trasy administracyjne*/}
                         <Route 
                             path="/admin" 
                             element={currentUser?.role === 'admin' ? <AdminPage /> : <Navigate to="/" />}
@@ -112,9 +112,6 @@ const App = () => {
                                <Navigate to="/" />
                            )}
                        />
-                       
-
-                        
                     </Routes>
                 </main>
                 <Footer />

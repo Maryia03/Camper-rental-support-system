@@ -15,7 +15,7 @@ const AdminReports = () => {
     const navigate = useNavigate();
 
     async function getReservations(userid) {
-        const fetchedReservations = await getReservationsByUserId(); // Wszystkie rezerwacje dla administratora
+        const fetchedReservations = await getReservationsByUserId();
         setReservations(fetchedReservations);
     }
     async function getReports() {
@@ -32,8 +32,6 @@ const AdminReports = () => {
 
     useEffect(() => {
             getReservations();
-
-            // Odczytujemy zapisany stan z localStorage
             setReservations(
                 fetchedReservations.map(reservation => ({
                     ...reservation,
@@ -41,14 +39,12 @@ const AdminReports = () => {
                     pickUpCamperCondition: reservation.pickUpCamperCondition || '',
                     returnDate: reservation.end || '',
                     returnCamperCondition: reservation.returnCamperCondition || '',
-                    // isPickUpSaved: storedReservationStates[reservation.id]?.isPickUpSaved || false,
-                    // isReturnSaved: storedReservationStates[reservation.id]?.isReturnSaved || false,
+                    //isPickUpSaved: storedReservationStates[reservation.id]?.isPickUpSaved || false,
+                    //isReturnSaved: storedReservationStates[reservation.id]?.isReturnSaved || false,
                 }))
             );
-
             getReports();
         
-
         const storedPickUpReports = JSON.parse(localStorage.getItem('pickUpReports')) || [];
         const storedReturnReports = JSON.parse(localStorage.getItem('returnReports')) || [];
         setPickUpReports(storedPickUpReports);
@@ -56,7 +52,6 @@ const AdminReports = () => {
     }, [refresh]);
 
     const updateReservationState = (reservationId, updates) => {
-        // Aktualizujemy lokalny stan komponentu
         setReservations(prevReservations =>
             prevReservations.map(reservation =>
                 reservation.id === reservationId
@@ -65,7 +60,6 @@ const AdminReports = () => {
             )
         );
 
-        // Synchronizujemy stan w localStorage
         const currentStates = JSON.parse(localStorage.getItem('reservationStates')) || {};
         localStorage.setItem(
             'reservationStates',

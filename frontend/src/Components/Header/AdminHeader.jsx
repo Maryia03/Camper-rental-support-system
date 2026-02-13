@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import './Header.css'; // Używamy tych samych stylów co w Header
+import './Header.css';
 import { AuthContext } from '../../Context/AuthContext';
 
 const AdminHeader = () => {

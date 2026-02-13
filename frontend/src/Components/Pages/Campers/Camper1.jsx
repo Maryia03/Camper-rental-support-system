@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';  // Dodaj ten import na początku pliku
-import LogIn from '../LogIn';  // Correct the path
+import { Modal } from 'react-bootstrap';
+import LogIn from '../LogIn';
 import { AuthContext } from '../../../Context/AuthContext';
 import './Camper1.css';
 import kamper1Image from './Image/Camper1/dom1.jpeg';
@@ -10,9 +10,9 @@ import kamper3Image from './Image/Camper1/dom4.jpeg';
 import kamper4Image from './Image/Camper1/image5.jpeg';
 import camper12Image from './Image/Camper1/camper1-wn.webp';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // Importujemy stylowanie kalendarza
+import 'react-calendar/dist/Calendar.css';
 
-// Import ikon
+//Import ikon
 import lozkoIcon from './Image/Dane techniczne/lozko2.svg';
 import ludzikIcon from './Image/Dane techniczne/ludzik2.svg';
 import snowIcon from './Image/Dane techniczne/snow.svg';
@@ -32,51 +32,44 @@ const Camper1 = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [showLoginModal, setShowLoginModal] = useState(false); // Stan do pokazania modala logowania
 
-    // Funkcja pomocnicza do formatowania daty na string
     const formatDate = (date) => {
         if (!date) return '';
-        return date.toLocaleDateString();  // Zwraca datę w formacie dd/mm/yyyy
+        return date.toLocaleDateString();
     };
 
-    // Funkcja rezerwacji
+    //Funkcja rezerwacji
     const handleReserve = () => {
-        // Sprawdzenie, czy użytkownik jest zalogowany
         if (!currentUser) {
-            setShowLoginModal(true);  // Otwórz modal logowania, jeśli użytkownik nie jest zalogowany
+            setShowLoginModal(true);
             return;
         }
-
-        // Sprawdzenie, czy wszystkie pola są wypełnione
         if (!startDate || !endDate || !location || guests < 1) {
             return setErrorMessage('Proszę wypełnić wszystkie pola.');
         }
-
-        // Sprawdzenie, czy daty są poprawne (czy nie są w przeszłości oraz czy data końcowa jest po początkowej)
         if (new Date(startDate) < new Date() || new Date(endDate) < new Date() || new Date(startDate) >= new Date(endDate)) {
             return setErrorMessage('Kamper jest niedostępny w wybranym terminie.');
         }
 
-        // Dodanie rezerwacji
+        //Dodanie rezerwacji
         const newReservation = {
             id: Date.now(),
             userId: currentUser.id,
-            image: kamper4Image, // Zdjęcie kampera
+            image: kamper4Image,
             startDate: formatDate(startDate),
             endDate: formatDate(endDate),
             location,
             guests,
-            camper: 'Kamper A'  // Nazwa kampera
+            camper: 'Kamper A'
         };
 
-        addReservation(newReservation);  // Dodaj rezerwację do kontekstu
+        addReservation(newReservation);
         setReservationStatus('Zarezerwowano!');
-        setTimeout(() => setReservationStatus(''), 3000);  // Status rezerwacji na 3 sekundy
-        navigate('/reservations');  // Przekierowanie na stronę rezerwacji
+        setTimeout(() => setReservationStatus(''), 3000);
+        navigate('/reservations');
     };
 
     return (
         <div className="camper1-details">
-            {/* Modal logowania na górze ekranu */}
             <Modal show={showLoginModal} onHide={() => setShowLoginModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Logowanie</Modal.Title>
@@ -88,20 +81,15 @@ const Camper1 = () => {
 
             <h2>Kamper A</h2>
             
-            {/* Główne zdjęcie kampera */}
             <img src={kamper4Image} alt="" className="camper1-detail-image" />
 
-            {/* Galeria zdjęć kampera */}
             <div className="camper1-gallery">
                 <img src={kamper2Image} alt="Kamper A - 1" />
                 <img src={kamper3Image} alt="Kamper A - 2" />
                 <img src={kamper1Image} alt="Kamper A - 3" />
             </div>
             <hr className="divider" />
-
-            {/* Sekcja tekstowa z opisem kampera */}
             <div className="camper1-text-section">
-                {/* Pierwszy blok tekstowy z obrazkiem */}
                 <div className="camper1-text-image">
                     <img src={kamper1Image} alt="Kamper 1" className="camper1-image" />
                     <div className="camper1-text">
@@ -119,8 +107,6 @@ const Camper1 = () => {
                         </p>
                     </div>
                 </div>
-
-                {/* Drugi blok tekstowy z obrazkiem (odwrócony układ) */}
                 <div className="camper1-text-image reverse">
                     <div className="camper1-text">
                         <h3>Stylowe i praktyczne wyposażenie</h3>
@@ -146,7 +132,7 @@ const Camper1 = () => {
             </div>
             <hr className="divider" />
 
-            {/* Sekcja cech kampera z ikonami */}
+            {/*Sekcja cech kampera z ikonami*/}
             <div className="camper1-features-container">
                 <div className="camper1-features">
                     <div className="feature-item">
@@ -179,7 +165,7 @@ const Camper1 = () => {
                 </div>
             </div>
             <hr className="divider" />
-            {/* Sekcja rezerwacji */}
+            {/*Sekcja rezerwacji*/}
             <div className="camper1-reservation-container">
                 <div className="camper1-reservation-form-container">
                     <h3>Rezerwacja Kampera</h3>
@@ -203,7 +189,6 @@ const Camper1 = () => {
                         />
                     </div>
 
-                    {/* Wyświetlanie błędów */}
                     {errorMessage && <p className="camper1-error-message">{errorMessage}</p>}
                 </div>
 
@@ -218,10 +203,7 @@ const Camper1 = () => {
                 </div>
             </div>
 
-            {/* Przycisk do rezerwacji */}
             <button onClick={handleReserve} className="camper1-reserve-button">Rezerwuj</button>
-
-            {/* Status rezerwacji */}
             {reservationStatus && <p className="camper1-reservation-status">{reservationStatus}</p>}
         </div>
     );

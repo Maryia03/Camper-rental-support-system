@@ -17,7 +17,7 @@ const AdminPrices = () => {
 
 
 
-    // Załadowanie kamperów z localStorage lub utworzenie przykładowych danych
+    //Załadowanie kamperów z localStorage lub utworzenie przykładowych danych
     useEffect(() => {
         async function getPrices() {
             setPrices(await getAllPrices())
@@ -25,7 +25,7 @@ const AdminPrices = () => {
         getPrices();
     }, [refresh]);
 
-    // Wybór kategorii kampera
+    //Wybór kategorii kampera
     const handleSelectCategory = (category) => {
         setSelectedCategory(category);
         const selectedCamper = prices.find((camper) => camper.vehicleType.name === category);
@@ -44,7 +44,7 @@ const AdminPrices = () => {
         }
     };
 
-    // Obsługa zmian w formularzu
+    //Obsługa zmian w formularzu
     const handleInputChange = (type, value) => {
         setNewPrice((prevPrice) => ({
             ...prevPrice,
@@ -52,7 +52,7 @@ const AdminPrices = () => {
         }));
     };
 
-    // Zapisanie nowych cen
+    //Zapisanie nowych cen
     const handleSavePrices = () => {
         if(!newPrice.weekendPrice){
             alert('podaj cene')
@@ -72,7 +72,7 @@ const AdminPrices = () => {
         setRefresh(!refresh)
     };
 
-    // Filtrowanie listy kamperów
+    //Filtrowanie listy kamperów
     const filteredPrices = selectedCategory
         ? prices.filter((camper) => camper.vehicleType.name === selectedCategory)
         : prices;
@@ -80,8 +80,6 @@ const AdminPrices = () => {
     return (
         <div className="prices-container">
             <h1>Ceny Kamperów</h1>
-
-            {/* Wybór kategorii */}
             <div className="category-selection">
                 <h3>Wybierz kategorię kampera</h3>
                 <select
@@ -96,7 +94,6 @@ const AdminPrices = () => {
                 </select>
             </div>
 
-            {/* Edycja ceny kampera */}
             {selectedCategory && (
                 <div className="price-edit">
                     <h3>Edytuj ceny dla kategorii: {selectedCategory}</h3>
@@ -130,7 +127,7 @@ const AdminPrices = () => {
                 </div>
             )}
 
-            {/* Lista kamperów */}
+            {/*Lista kamperów*/}
             <div className="camper-list">
                 <h3>Lista cen:</h3>
                 {filteredPrices.length > 0 ? (
@@ -138,7 +135,6 @@ const AdminPrices = () => {
                         <div key={camper.id} className="camper-card">
                             <h3>{camper.name}</h3>
                             <p>Kategoria: {camper.vehicleType.name}</p>
-                            {/* Sprawdzamy, czy priceChanges jest tablicą i filtrujemy modyfikacje dla konkretnej daty */}
                                     <div key={index}>
                                         <p>
                                             Ceny od {camper.start} do {camper.end}:

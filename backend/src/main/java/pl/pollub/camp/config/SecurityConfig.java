@@ -32,7 +32,7 @@ public class SecurityConfig {
             "/reservation/vehicle/**",
             "/prices/find",
             "/location/all"
-    };// lista dozwolonych enpointów dla niezalogowanych
+    };//lista dozwolonych enpointów dla niezalogowanych
 
     private static final String[] CLIENT_ENDPONTS = {
             "/reservation",
@@ -60,7 +60,7 @@ public class SecurityConfig {
             "/reports/**",
             "/repairs",
             "/repairs/**"
-    };//  lista endpointów dla admina
+    };//lista endpointów dla admina
 
 
     @Bean

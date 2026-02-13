@@ -6,8 +6,8 @@ import kamper1Image from './Image/Camper3/model2.jpeg';
 import kamper2Image from './Image/Camper3/model1.jpeg';
 import kamper3Image from './Image/Camper3/dom1.jpeg';
 import kamper4Image from './Image/Camper3/kamper13.jpeg';
-import Calendar from 'react-calendar';  // Importujemy react-calendar
-import 'react-calendar/dist/Calendar.css';  // Importujemy stylowanie kalendarza
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const Camper3 = () => {
     const { currentUser, addReservation, reservations, removeReservation } = useContext(AuthContext);
@@ -19,37 +19,34 @@ const Camper3 = () => {
     const [guests, setGuests] = useState(1);
     const [reservationStatus, setReservationStatus] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
-    // Funkcja pomocnicza do formatowania daty na string
     const formatDate = (date) => {
         if (!date) return '';
-        return date.toLocaleDateString();  // Zwraca datę w formacie dd/mm/yyyy
+        return date.toLocaleDateString();
     };
 
-    // Funkcja rezerwacji
+    //Funkcja rezerwacji
     const handleReserve = () => {
-        if (!currentUser) return navigate('/login');  // Sprawdzenie, czy użytkownik jest zalogowany
+        if (!currentUser) return navigate('/login');
         if (!startDate || !endDate || !location || guests < 1) return setErrorMessage('Proszę wypełnić wszystkie pola.');
         if (new Date(startDate) < new Date() || new Date(endDate) < new Date() || new Date(startDate) >= new Date(endDate)) {
             return setErrorMessage('Kamper jest niedostępny w wybranym terminie.');
         }
 
-        // Dodanie rezerwacji
         const newReservation = {
             id: Date.now(),
             userId: currentUser.id,
-            image: kamper4Image, // Zdjęcie kampera
+            image: kamper4Image,
             startDate: formatDate(startDate),
             endDate: formatDate(endDate),
             location,
             guests,
-            camper: 'Kamper A'  // Nazwa kampera
+            camper: 'Kamper A'
         };
 
-        addReservation(newReservation);  // Dodaj rezerwację do kontekstu
+        addReservation(newReservation);
         setReservationStatus('Zarezerwowano!');
-        setTimeout(() => setReservationStatus(''), 3000);  // Status rezerwacji na 3 sekundy
-        navigate('/reservations');  // Przekierowanie na stronę rezerwacji
+        setTimeout(() => setReservationStatus(''), 3000);
+        navigate('/reservations');
     };
 
     return (

@@ -8,7 +8,6 @@ import { faInstagram, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import './Contact.css';
 import image1 from './Image/img2.jpeg';
 
-// Ustawienie ikony markera
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),

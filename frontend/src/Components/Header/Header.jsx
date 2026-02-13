@@ -1,4 +1,3 @@
-// Header.js
 import React, { useContext, useState } from 'react';
 import { Container, Navbar, Nav, Modal, Button } from 'react-bootstrap';
 import logo from './GoCamper.png';

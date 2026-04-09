@@ -3,7 +3,8 @@ This project is a web application designed to support camper rental services. Th
 
 ## 🛠️ Technologies
 - Java 17
-- Spring Boot
+- Spring Boot, Spring Security, Spring Data JPA, Spring MVC
+- JWT
 - React
 - MySQL
 - Docker
